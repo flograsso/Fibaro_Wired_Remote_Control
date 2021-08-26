@@ -3,6 +3,8 @@
 
 
 Channel channelArray[CORTINA_NUMBERS];
+uint8_t cortinaActual_control2 = 1;
+uint8_t cortinaActual_control3 = 5;
 
 void moverCortina(uint8_t cortinaNumber, char action)
 {     
@@ -60,5 +62,97 @@ bool selectChannel(uint8_t cortinaNumber)
       if Ok
       return 1;
       else
-      return 0
+      return 0+
+      
+      uint8_t cortinaActual;
+      unsigned long init;
+      while (cortinaActual != cortinaNumber)
+      {
+            blinkChannel(channelArray[cortinaNumber].buttonDownCHShifter);
+
+            init = millis();
+            switch(cortinaNumber)
+            {
+                  case 1:
+                  case 2:
+                  case 3:
+                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
+                        !(analogRead(channelArray[4].LEDpinADC) > (channelArray[4].normalVoltajeLED * 0.6) ));
+                        break;
+                  case 4:
+                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
+                        !(analogRead(channelArray[3].LEDpinADC) > (channelArray[3].normalVoltajeLED * 0.6) ));
+                        break;
+                  case 5:
+                  case 6:
+                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
+                        !(analogRead(channelArray[7].LEDpinADC) > (channelArray[7].normalVoltajeLED * 0.6) ));
+                        break;
+                  case 7:
+                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
+                        !(analogRead(channelArray[5].LEDpinADC) > (channelArray[5].normalVoltajeLED * 0.6) ));
+                        break;
+                  case 8:   
+                        while ((millis() - init < 1500) && ((analogRead(channelArray[1].LEDpinADC) > (channelArray[1].normalVoltajeLED * 0.6)) ||
+                        (analogRead(channelArray[2].LEDpinADC) > (channelArray[2].normalVoltajeLED * 0.6)) ||
+                        (analogRead(channelArray[3].LEDpinADC) > (channelArray[3].normalVoltajeLED * 0.6)) ||
+                        (analogRead(channelArray[4].LEDpinADC) > (channelArray[4].normalVoltajeLED * 0.6)) ));
+                        break;
+                  case 9:
+                        while ((millis() - init < 1500) && ((analogRead(channelArray[5].LEDpinADC) > (channelArray[5].normalVoltajeLED * 0.6)) || 
+                        (analogRead(channelArray[6].LEDpinADC) > (channelArray[6].normalVoltajeLED * 0.6))  ||
+                        (analogRead(channelArray[7].LEDpinADC) > (channelArray[7].normalVoltajeLED * 0.6))  ));
+                        break;
+            }
+            if (millis() - init < 1500)
+            {
+                  cortinaActual = cortinaNumber;
+                  turnOnLedSeleccionCortina(cortinaActual);
+            }
+
+      }
+
+      
+      
+}
+
+
+void turnOnLedSeleccionCortina(uitn8_t cortinaSeleccionada)
+{
+      if (cortinaSeleccionada == 8) // Manejador de multiples cortinas 
+      {
+            setChannelState(channelArray[5].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+            setChannelState(channelArray[6].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+            setChannelState(channelArray[7].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+
+            setChannelState(channelArray[1].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+            setChannelState(channelArray[2].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+            setChannelState(channelArray[3].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+            setChannelState(channelArray[4].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+                  
+
+      }
+      else
+            if (cortinaSeleccionada == 9) // Manejador de multiples cortinas 
+            {
+                  setChannelState(channelArray[1].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+                  setChannelState(channelArray[2].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+                  setChannelState(channelArray[3].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+                  setChannelState(channelArray[4].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+                  
+                  setChannelState(channelArray[5].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+                  setChannelState(channelArray[6].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+                  setChannelState(channelArray[7].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+            }
+            else
+            {
+                  for (int i = 1 ; i <CORTINA_NUMBERS - 2 ; i++)
+                  {
+                        if( i == cortinaSeleccionada )
+                              setChannelState(channelArray[i].LEDpinOUTCHShifter,HIGH); // Enciendo led de seleccion de cortina actual 
+                        else
+                              setChannelState(channelArray[i].LEDpinOUTCHShifter,LOW); // Enciendo led de seleccion de cortina actual 
+                  }
+            }
+
 }

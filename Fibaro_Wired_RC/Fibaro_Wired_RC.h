@@ -53,7 +53,7 @@
 #define CORTINA_7_FAVOURITE_POSITION_DELAY            5
 
 
-#define CORTINA_NUMBERS       8 // +1 del largo (arranco en 1)
+#define CORTINA_NUMBERS       10 // +1 del largo (arranco en 1) Son 7 cortinas mas 2 estados que manejan todo el grupo de cortinas (todos los leds titilantes)
 
 
 extern WebServer server;
@@ -75,7 +75,8 @@ struct Channel
 };
 
 extern Channel channelArray[CORTINA_NUMBERS];
-
+extern uint8_t cortinaActual_control2;
+extern uint8_t cortinaActual_control3;
 
 
 

@@ -6,5 +6,6 @@
 
 void moverCortina(uint8_t cortinaNumber, char action);
 bool selectChannel(uint8_t cortinaNumber);
+void turnOnLedSeleccionCortina(cortinaActual);
 
 #endif

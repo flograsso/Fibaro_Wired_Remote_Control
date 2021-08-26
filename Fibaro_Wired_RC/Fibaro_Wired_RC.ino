@@ -1,5 +1,7 @@
 #include "Fibaro_Wired_RC.h"
 
+#define ACTIVATE_DEBUG
+
 void setup()
 {
 
@@ -16,7 +18,13 @@ void setup()
       readLedVoltajeNormal();
       ConnectWiFi_STA(true);
       InitServer();
-      
+
+
+      // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
+      selectChannel(cortinaActual_control2);
+      selectChannel(cortinaActual_control3);
+      turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)
+      turnOnLedSeleccionCortina(cortinaActual_control3); // Enciendo led de seleccion de cortina actual la numero 1 (control 3)
 
 }
 
@@ -79,44 +87,52 @@ void initArrayChannels()
       channelArray[2].buttonUpCHShifter = CONTROL_2_UP_SHIFTER_CH;
       channelArray[3].buttonUpCHShifter = CONTROL_2_UP_SHIFTER_CH;
       channelArray[4].buttonUpCHShifter = CONTROL_2_UP_SHIFTER_CH;
+      channelArray[8].buttonUpCHShifter = CONTROL_2_UP_SHIFTER_CH;
 
       // Control 3
       channelArray[5].buttonUpCHShifter = CONTROL_3_UP_SHIFTER_CH;
       channelArray[6].buttonUpCHShifter = CONTROL_3_UP_SHIFTER_CH;
       channelArray[7].buttonUpCHShifter = CONTROL_3_UP_SHIFTER_CH;
+      channelArray[9].buttonUpCHShifter = CONTROL_3_UP_SHIFTER_CH;
 
       // Control 2
       channelArray[1].buttonDownCHShifter = CONTROL_2_DOWN_SHIFTER_CH;
       channelArray[2].buttonDownCHShifter = CONTROL_2_DOWN_SHIFTER_CH;
       channelArray[3].buttonDownCHShifter = CONTROL_2_DOWN_SHIFTER_CH;
       channelArray[4].buttonDownCHShifter = CONTROL_2_DOWN_SHIFTER_CH;
+      channelArray[8].buttonDownCHShifter = CONTROL_2_DOWN_SHIFTER_CH;
 
       // Control 3
       channelArray[5].buttonDownCHShifter = CONTROL_3_DOWN_SHIFTER_CH;
       channelArray[6].buttonDownCHShifter = CONTROL_3_DOWN_SHIFTER_CH;
       channelArray[7].buttonDownCHShifter = CONTROL_3_DOWN_SHIFTER_CH;
+      channelArray[9].buttonDownCHShifter = CONTROL_3_DOWN_SHIFTER_CH;
 
       // Control 2
       channelArray[1].buttonStopCHShifter = CONTROL_2_STOP_SHIFTER_CH;
       channelArray[2].buttonStopCHShifter = CONTROL_2_STOP_SHIFTER_CH;
       channelArray[3].buttonStopCHShifter = CONTROL_2_STOP_SHIFTER_CH;
       channelArray[4].buttonStopCHShifter = CONTROL_2_STOP_SHIFTER_CH;
+      channelArray[8].buttonStopCHShifter = CONTROL_2_STOP_SHIFTER_CH;
 
       // Control 3
       channelArray[5].buttonStopCHShifter = CONTROL_3_STOP_SHIFTER_CH;
       channelArray[6].buttonStopCHShifter = CONTROL_3_STOP_SHIFTER_CH;
       channelArray[7].buttonStopCHShifter = CONTROL_3_STOP_SHIFTER_CH;
+      channelArray[9].buttonStopCHShifter = CONTROL_3_STOP_SHIFTER_CH;
 
       // Control 2
       channelArray[1].buttonSelectCHShifter = CONTROL_2_SELECT_SHIFTER_CH;
       channelArray[2].buttonSelectCHShifter = CONTROL_2_SELECT_SHIFTER_CH;
       channelArray[3].buttonSelectCHShifter = CONTROL_2_SELECT_SHIFTER_CH;
       channelArray[4].buttonSelectCHShifter = CONTROL_2_SELECT_SHIFTER_CH;
+      channelArray[8].buttonSelectCHShifter = CONTROL_2_SELECT_SHIFTER_CH;
 
       // Control 3
       channelArray[5].buttonSelectCHShifter = CONTROL_3_SELECT_SHIFTER_CH;
       channelArray[6].buttonSelectCHShifter = CONTROL_3_SELECT_SHIFTER_CH;
       channelArray[7].buttonSelectCHShifter = CONTROL_3_SELECT_SHIFTER_CH;
+      channelArray[9].buttonSelectCHShifter = CONTROL_3_SELECT_SHIFTER_CH;
 
 
       // PINES MUX PARA ACTUAR SOBRE LEDS DE CANAL ACTUAL
@@ -140,8 +156,4 @@ void initArrayChannels()
 }
 
 
-void presionarBoton(uint8_t cortina, char accion)
-{
-      
-}
 
