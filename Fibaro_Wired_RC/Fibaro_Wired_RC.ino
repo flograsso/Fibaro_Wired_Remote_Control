@@ -11,7 +11,7 @@ void setup()
             DEBUG_SERIAL.println("Init");
       #endif
       
-
+      
       initArrayChannels();
       initAnalog();
       initMUX();
