@@ -2,6 +2,7 @@
 #define MUX_H
 
 #include "Arduino.h"
+#define DEBUG_SERIAL Serial
 
 #define MUX_S0_PIN            23
 #define MUX_S1_PIN            22

@@ -17,8 +17,9 @@ void loop()
 
     for (int i = 0; i<8; i++)
     {
-        Serial.println(i);
-        setMuxChannel(i);
-        blinkChannel(i);
+        Serial.println(1);
+        //setMuxChannel(i);
+        blinkChannel(1);
+        //blinkChannel(2);
     }
 }

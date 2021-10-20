@@ -25,8 +25,11 @@ void setChannelState(uint8_t channel,uint8_t state)
 
 void blinkChannel(uint8_t channel)
 {
+      
       setMuxChannel(channel);
       digitalWrite(MUX_ACT_PIN, LOW);
-      delay(2000);
+      delay(1000);
       digitalWrite(MUX_ACT_PIN, HIGH);
+      setMuxChannel(15);
+      delay(1000);
 }

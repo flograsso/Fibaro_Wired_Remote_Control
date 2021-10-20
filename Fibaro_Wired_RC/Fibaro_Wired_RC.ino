@@ -11,18 +11,30 @@ void setup()
             DEBUG_SERIAL.println("Init");
       #endif
       
+
       
       initArrayChannels();
       initAnalog();
       initMUX();
       readLedVoltajeNormal();
-      ConnectWiFi_STA(true);
-      InitServer();
+      //ConnectWiFi_STA(true);
+      //InitServer();
+
+            //initMUX();
+  
+    
+
+
 
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
-      selectChannel(cortinaActual_control2);
-      selectChannel(cortinaActual_control3);
+      for (int i = 0;i<8;i++)
+      {
+            selectChannel(i);
+            delay(4000);
+      }
+      
+      //selectChannel(cortinaActual_control3);
       turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)
       turnOnLedSeleccionCortina(cortinaActual_control3); // Enciendo led de seleccion de cortina actual la numero 1 (control 3)
 
@@ -32,8 +44,8 @@ void setup()
 
 void loop()
 {
-      server.handleClient();
-      testWifiConnection();
+      //server.handleClient();
+      //testWifiConnection();
      
       
 }
@@ -47,6 +59,12 @@ void initAnalog()
       pinMode(CORTINA_5_ANALOG_LED,INPUT);
       pinMode(CORTINA_6_ANALOG_LED,INPUT);
       pinMode(CORTINA_7_ANALOG_LED,INPUT);
+
+      for (int i = 0; i<16; i++)
+      {
+        setMuxChannel(i);
+        setChannelState(i,HIGH);
+      }
 }
 
 void readLedVoltajeNormal()
@@ -57,11 +75,11 @@ void readLedVoltajeNormal()
             for (int j = 0; j < 10; j++)
             {
                   sum += analogRead(channelArray[i].LEDpinADC);
-                  delay(200);
+                  delay(100);
             }
             channelArray[i].normalVoltajeLED = sum / 10;
-            DEBUG_SERIAL.print("Voltaje normal leido = ");
-            DEBUG_SERIAL.prinln(channelArray[i].normalVoltajeLED);
+            DEBUG_SERIAL.print("Voltaje normal leido en channel " + (String)i + "en pin " + (String)channelArray[i].LEDpinADC + " = ");
+            DEBUG_SERIAL.println(channelArray[i].normalVoltajeLED);
       }
             
 }
