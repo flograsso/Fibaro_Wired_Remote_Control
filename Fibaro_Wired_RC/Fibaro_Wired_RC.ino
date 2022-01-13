@@ -19,10 +19,17 @@ void setup()
       ConnectWiFi_STA(true);
       InitServer();
 
+      // Esto va?
+      for (int i = 0; i<16; i++)
+      {
+        setMuxChannel(i);
+        setChannelState(i,HIGH);
+      }
+
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
       selectChannel(cortinaActual_control2);
-      selectChannel(cortinaActual_control3);
+      //selectChannel(cortinaActual_control3);
       turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)
       turnOnLedSeleccionCortina(cortinaActual_control3); // Enciendo led de seleccion de cortina actual la numero 1 (control 3)
 
@@ -51,17 +58,20 @@ void initAnalog()
 
 void readLedVoltajeNormal()
 {
-      for (int i = 1 ; i <CORTINA_NUMBERS ; i++)
+      for (int i = 1 ; i < 8 ; i++)
       {
             float sum = 0;
             for (int j = 0; j < 10; j++)
             {
                   sum += analogRead(channelArray[i].LEDpinADC);
-                  delay(200);
+                  delay(100);
             }
-            channelArray[i].normalVoltajeLED = sum / 10;
-            DEBUG_SERIAL.print("Voltaje normal leido = ");
-            DEBUG_SERIAL.prinln(channelArray[i].normalVoltajeLED);
+            // OJO ESTO!!!! AJUSTAR SEGUN LA FUENTE QUE USEEE
+            //channelArray[i].normalVoltajeLED = sum / 10;
+            channelArray[i].normalVoltajeLED = 4095;
+            DEBUG_SERIAL.print("Voltaje normal leido en channel " + (String)i + "en pin " + (String)channelArray[i].LEDpinADC + " = ");
+            DEBUG_SERIAL.println(channelArray[i].normalVoltajeLED);
+
       }
             
 }

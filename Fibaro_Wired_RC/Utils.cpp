@@ -12,8 +12,10 @@ void moverCortina(uint8_t cortinaNumber, char action)
       if (cortinaNumber >= 1 && cortinaNumber <= CORTINA_NUMBERS - 1)
       {
             // Si pude seleccionar el canal en el control
-            if (selectChannel(cortinaNumber))
+            if (cortinaActual_control2 == cortinaNumber || cortinaActual_control3 == cortinaNumber || selectChannel(cortinaNumber))
             {
+                  DEBUG_SERIAL.print("Tomo accion de '" + (String)action + "' sobre cortina: " +cortinaNumber) ;
+                  DEBUG_SERIAL.println(cortinaNumber);     
                   switch(action)
                   {
                         case 'U':
@@ -42,82 +44,76 @@ void moverCortina(uint8_t cortinaNumber, char action)
 }
 
 
-
+/*
 {
 // TODO
       uint8_t LEDpinADC; // para elegir
       uint8_t LEDpinOUTCHShifter;// para indicar cual estoy manejando
 }
-
+*/
 bool selectChannel(uint8_t cortinaNumber)
 {
 
       // OJO que tengo que medir varias veces ya que tititla
       // Hacer test midiendo los 4 analog seguidido a ver si lo veo
       // funcion con cortinas en simultaneo? enciendo todos los leds. tendria que crear una nueva cortina
-      Y tengo que ver que los otros leds no esten encendidos tmb
-      unsigned long init = millis();
-      while ((millis() - init < 4000) && (analogRead(channelArray[channel].LEDpinADC) > (channelArray[channel].normalVoltajeLED * 0.6) ));
-      
-      if Ok
-      return 1;
-      else
-      return 0+
-      
-      uint8_t cortinaActual;
-      unsigned long init;
-      while (cortinaActual != cortinaNumber)
-      {
-            blinkChannel(channelArray[cortinaNumber].buttonDownCHShifter);
+      //Y tengo que ver que los otros leds no esten encendidos tmb
 
-            init = millis();
+      DEBUG_SERIAL.print("Select channel actual: ");
+      DEBUG_SERIAL.println(cortinaNumber);
+
+
+      uint8_t cortinaActual;
+      unsigned long timeout;
+
+
+
+      blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
+      DEBUG_SERIAL.print("Blinkeo canal: ");
+      DEBUG_SERIAL.println(channelArray[cortinaNumber].buttonSelectCHShifter);
+      timeout = millis();
+ 
             switch(cortinaNumber)
             {
                   case 1:
                   case 2:
                   case 3:
-                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
-                        !(analogRead(channelArray[4].LEDpinADC) > (channelArray[4].normalVoltajeLED * 0.6) ));
+                        while (!readAnalogUntil(cortinaNumber,4) && (millis()-timeout) < 30000) blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
                         break;
                   case 4:
-                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
-                        !(analogRead(channelArray[3].LEDpinADC) > (channelArray[3].normalVoltajeLED * 0.6) ));
+                        while (!readAnalogUntil(cortinaNumber,3) && (millis()-timeout) < 30000)  blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
                         break;
                   case 5:
                   case 6:
-                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
-                        !(analogRead(channelArray[7].LEDpinADC) > (channelArray[7].normalVoltajeLED * 0.6) ));
+                        while (!readAnalogUntil(cortinaNumber,7) && (millis()-timeout) < 30000) blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
                         break;
                   case 7:
-                        while (((millis() - init < 1500) && (analogRead(channelArray[cortinaNumber].LEDpinADC) > (channelArray[cortinaNumber].normalVoltajeLED * 0.6))) || 
-                        !(analogRead(channelArray[5].LEDpinADC) > (channelArray[5].normalVoltajeLED * 0.6) ));
+                        while (!readAnalogUntil(cortinaNumber,5) && (millis()-timeout) < 30000) blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
                         break;
                   case 8:   
-                        while ((millis() - init < 1500) && ((analogRead(channelArray[1].LEDpinADC) > (channelArray[1].normalVoltajeLED * 0.6)) ||
-                        (analogRead(channelArray[2].LEDpinADC) > (channelArray[2].normalVoltajeLED * 0.6)) ||
-                        (analogRead(channelArray[3].LEDpinADC) > (channelArray[3].normalVoltajeLED * 0.6)) ||
-                        (analogRead(channelArray[4].LEDpinADC) > (channelArray[4].normalVoltajeLED * 0.6)) ));
+                        while (!read4AnalogUntil() && (millis()-timeout) < 30000) blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
                         break;
                   case 9:
-                        while ((millis() - init < 1500) && ((analogRead(channelArray[5].LEDpinADC) > (channelArray[5].normalVoltajeLED * 0.6)) || 
-                        (analogRead(channelArray[6].LEDpinADC) > (channelArray[6].normalVoltajeLED * 0.6))  ||
-                        (analogRead(channelArray[7].LEDpinADC) > (channelArray[7].normalVoltajeLED * 0.6))  ));
+                        while (!read3AnalogUntil() && (millis()-timeout) < 30000) blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
                         break;
             }
-            if (millis() - init < 1500)
-            {
-                  cortinaActual = cortinaNumber;
-                  turnOnLedSeleccionCortina(cortinaActual);
-            }
 
-      }
+
+            if ((cortinaNumber > 1 && cortinaNumber <=4) || cortinaNumber == 8 )
+                        cortinaActual_control2 = cortinaNumber;
+            else if ((cortinaNumber >= 5 && cortinaNumber <=7 ) || cortinaNumber == 9)
+                        cortinaActual_control2 = cortinaNumber;
+
+            turnOnLedSeleccionCortina(cortinaNumber);
+
+            return true;
 
       
       
 }
 
 
-void turnOnLedSeleccionCortina(uitn8_t cortinaSeleccionada)
+void turnOnLedSeleccionCortina(uint8_t cortinaSeleccionada)
 {
       if (cortinaSeleccionada == 8) // Manejador de multiples cortinas 
       {
@@ -155,4 +151,46 @@ void turnOnLedSeleccionCortina(uitn8_t cortinaSeleccionada)
                   }
             }
 
+}
+
+
+bool readAnalogUntil(uint8_t pinNumber, uint8_t controlPin)
+{
+      unsigned long timeout = millis();
+      while ((millis() - timeout) < 1000 && (analogRead(channelArray[pinNumber].LEDpinADC) > (channelArray[pinNumber].normalVoltajeLED * 0.6)) || (analogRead(channelArray[controlPin].LEDpinADC) < (channelArray[controlPin].normalVoltajeLED * 0.6) )) 
+      {
+            //Serial.println("Pin: " + (String)pinNumber + " con voltaje: " + (String)analogRead(channelArray[pinNumber].LEDpinADC));
+            //Serial.println("Pin: " + (String)controlPin + " con voltaje: " + (String)analogRead(channelArray[controlPin].LEDpinADC));
+            delay(50);
+      }
+
+      if ((millis() - timeout) >= 1000)
+            return false;  
+      else 
+            return true;    
+}
+
+bool read4AnalogUntil()
+{
+      unsigned long timeout = millis();
+      while ((millis() - timeout) < 1000 && ((analogRead(channelArray[1].LEDpinADC) > (channelArray[1].normalVoltajeLED * 0.6)) ||
+      (analogRead(channelArray[2].LEDpinADC) > (channelArray[2].normalVoltajeLED * 0.6)) ||
+      (analogRead(channelArray[3].LEDpinADC) > (channelArray[3].normalVoltajeLED * 0.6)) ||
+      (analogRead(channelArray[4].LEDpinADC) > (channelArray[4].normalVoltajeLED * 0.6)) ));
+      if ((millis() - timeout) >= 1000)
+            return false;  
+      else 
+            return true;    
+}
+
+bool read3AnalogUntil()
+{
+      unsigned long timeout = millis();
+      while ((millis() - timeout) < 1000 && ((analogRead(channelArray[5].LEDpinADC) > (channelArray[5].normalVoltajeLED * 0.6)) || 
+      (analogRead(channelArray[6].LEDpinADC) > (channelArray[6].normalVoltajeLED * 0.6))  ||
+      (analogRead(channelArray[7].LEDpinADC) > (channelArray[7].normalVoltajeLED * 0.6))  ));
+      if ((millis() - timeout) >= 1000)
+            return false;  
+      else 
+            return true;    
 }

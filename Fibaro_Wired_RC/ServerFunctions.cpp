@@ -11,7 +11,8 @@ WebServer server(80);
 void accionarSobreCortina() 
 {
 
-   
+   server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
+   server.send(200);
    // ACTION!
    moverCortina(server.arg(0).toInt(), server.arg(1).charAt(0));
 
@@ -24,8 +25,7 @@ void accionarSobreCortina()
 
    // devolver respuesta
    //server.send(200, "text/plain", String("POST ") + server.arg(String("Id")) + " " + server.arg(String("Status")));
-      server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
-      server.send(200);
+
 
       //ledBlink(SENDING_LED_PIN);
 }
