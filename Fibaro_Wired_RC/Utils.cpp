@@ -102,9 +102,9 @@ bool selectChannel(uint8_t cortinaNumber)
             if ((cortinaNumber > 1 && cortinaNumber <=4) || cortinaNumber == 8 )
                         cortinaActual_control2 = cortinaNumber;
             else if ((cortinaNumber >= 5 && cortinaNumber <=7 ) || cortinaNumber == 9)
-                        cortinaActual_control2 = cortinaNumber;
+                        cortinaActual_control3 = cortinaNumber;
 
-            turnOnLedSeleccionCortina(cortinaNumber);
+            //turnOnLedSeleccionCortina(cortinaNumber);
 
             return true;
 
