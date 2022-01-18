@@ -1,5 +1,5 @@
 #include "Utils.h"
-#include "Fibaro_Wired_RC.h"
+#include "Fibaro_Wired_RC2.h"
 
 Channel channelArray[CORTINA_NUMBERS];
 

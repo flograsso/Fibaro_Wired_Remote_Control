@@ -1,4 +1,4 @@
-#include "Fibaro_Wired_RC.h"
+#include "Fibaro_Wired_RC2.h"
 
 #define ACTIVATE_DEBUG
 

@@ -1,5 +1,5 @@
 #include "Utils.h"
-#include "Fibaro_Wired_RC.h"
+#include "Fibaro_Wired_RC1.h"
 
 Channel channelArray[CORTINA_NUMBERS];
 
@@ -20,8 +20,8 @@ void moverCortina(uint8_t cortinaNumber, char action)
             DEBUG_SERIAL.print("Mover cortina sobre cortina: " + cortinaNumber);
 
             // Si no tengo ya seleccionada la cortina
-            if !(cortinaActual_control1 == cortinaNumber || cortinaActual_control5 == cortinaNumber) 
-                  selectChannel(cortinaNumber))
+            if (!(cortinaActual_control1 == cortinaNumber || cortinaActual_control5 == cortinaNumber))
+                  selectChannel(cortinaNumber);
             
             DEBUG_SERIAL.print("Tomo accion de '" + (String)action + "' sobre cortina: " + cortinaNumber);
             switch (action)
@@ -45,6 +45,18 @@ void moverCortina(uint8_t cortinaNumber, char action)
                         break;
             }
       }
+}
+
+void blinkChannel(uint8_t channel)
+{
+      DEBUG_SERIAL.print("Simulo pulsación boton en el pin Nro: ");
+      DEBUG_SERIAL.println(channel);
+
+      digitalWrite(channel, LOW);
+      delay(1000);
+      digitalWrite(channel, HIGH);
+      delay(1000);
+
 }
 
 void selectChannel(uint8_t cortinaNumber)
@@ -92,7 +104,7 @@ void selectChannel(uint8_t cortinaNumber)
 
       //turnOnLedSeleccionCortina(cortinaNumber);
 }
-
+/*
 void turnOnLedSeleccionCortina(uint8_t cortinaSeleccionada)
 {
       if (cortinaSeleccionada == 8) // Manejador de multiples cortinas
@@ -128,6 +140,7 @@ void turnOnLedSeleccionCortina(uint8_t cortinaSeleccionada)
             }
       }
 }
+*/
 
 bool readAnalogUntil(uint8_t pinNumber, uint8_t controlPin)
 {

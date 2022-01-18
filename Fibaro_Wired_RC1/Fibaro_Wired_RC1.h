@@ -5,9 +5,12 @@
 
 #include <WiFi.h>
 #include <WebServer.h>
+#include <ESPAsyncWebServer.h>
+#include "fauxmoESP.h"
 #include "WiFIFunctions.h"
+#include <ArduinoQueue.h>
 #include "ServerFunctions.h"
-#include "MUX.h"
+
 
 
 // Control 1
@@ -41,7 +44,9 @@
 #define CORTINA_NUMBERS       7 // +1 del largo (arranco en 1) Son 7 cortinas mas 2 estados que manejan todo el grupo de cortinas (todos los leds titilantes)
 
 
-extern WebServer server;
+extern fauxmoESP fauxmo;
+
+
 
 
 
@@ -60,8 +65,9 @@ struct Channel
 };
 
 extern Channel channelArray[CORTINA_NUMBERS];
-extern uint8_t cortinaActual_control2;
-extern uint8_t cortinaActual_control3;
+extern uint8_t cortinaActual_control1;
+extern uint8_t cortinaActual_control5;
+
 
 
 
