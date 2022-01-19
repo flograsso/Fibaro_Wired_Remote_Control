@@ -4,6 +4,7 @@
 void initMUX()
 {
       pinMode(MUX_ACT_PIN, OUTPUT);
+      digitalWrite(MUX_ACT_PIN, HIGH);
       pinMode(MUX_S0_PIN, OUTPUT);
       pinMode(MUX_S1_PIN, OUTPUT);
       pinMode(MUX_S2_PIN, OUTPUT);

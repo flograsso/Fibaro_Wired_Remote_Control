@@ -20,8 +20,8 @@ void moverCortina(uint8_t cortinaNumber, char action)
             DEBUG_SERIAL.print("Mover cortina sobre cortina: " + cortinaNumber);
 
             // Si no tengo ya seleccionada la cortina
-            if !(cortinaActual_control2 == cortinaNumber || cortinaActual_control3 == cortinaNumber) 
-                  selectChannel(cortinaNumber))
+            if (!(cortinaActual_control2 == cortinaNumber || cortinaActual_control3 == cortinaNumber))
+                  selectChannel(cortinaNumber);
             
             DEBUG_SERIAL.print("Tomo accion de '" + (String)action + "' sobre cortina: " + cortinaNumber);
             switch (action)
@@ -40,7 +40,7 @@ void moverCortina(uint8_t cortinaNumber, char action)
 
                   case 'F':
                         blinkChannel(channelArray[cortinaNumber].buttonDownCHShifter);
-                        delay(channelArray[1].favouritePositionDelay);
+                        delay(channelArray[1].favouritePositionDelay * 1000);
                         blinkChannel(channelArray[cortinaNumber].buttonStopCHShifter);
                         break;
             }
@@ -58,7 +58,7 @@ void selectChannel(uint8_t cortinaNumber)
       // Presiono SELECT button para que blinkee el led del canal actual, con el primer pulso no cambia de canal.
       blinkChannel(channelArray[cortinaNumber].buttonSelectCHShifter);
 
-      DEBUG_SERIAL.print("Presiono SELECT button");
+      DEBUG_SERIAL.println("Presiono SELECT button");
       
       timeout = millis();
 
@@ -149,7 +149,7 @@ bool readAnalogUntil(uint8_t pinNumber, uint8_t controlPin)
       {
             //Serial.println("Pin: " + (String)pinNumber + " con voltaje: " + (String)analogRead(channelArray[pinNumber].LEDpinADC));
             //Serial.println("Pin: " + (String)controlPin + " con voltaje: " + (String)analogRead(channelArray[controlPin].LEDpinADC));
-            delay(50);
+            delay(100);
       }
 
       if ((millis() - timeout) >= 1000)
@@ -165,7 +165,7 @@ bool read4AnalogUntil()
                                              (analogRead(channelArray[2].LEDpinADC) > (channelArray[2].normalVoltajeLED * 0.6)) ||
                                              (analogRead(channelArray[3].LEDpinADC) > (channelArray[3].normalVoltajeLED * 0.6)) ||
                                              (analogRead(channelArray[4].LEDpinADC) > (channelArray[4].normalVoltajeLED * 0.6))))
-            delay(50);
+            delay(100);
       if ((millis() - timeout) >= 1000)
             return false;
       else
@@ -178,7 +178,7 @@ bool read3AnalogUntil()
       while ((millis() - timeout) < 1000 && ((analogRead(channelArray[5].LEDpinADC) > (channelArray[5].normalVoltajeLED * 0.6)) ||
                                              (analogRead(channelArray[6].LEDpinADC) > (channelArray[6].normalVoltajeLED * 0.6)) ||
                                              (analogRead(channelArray[7].LEDpinADC) > (channelArray[7].normalVoltajeLED * 0.6))))
-            delay(50);
+            delay(100);
       if ((millis() - timeout) >= 1000)
             return false;
       else

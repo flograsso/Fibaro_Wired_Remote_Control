@@ -1,12 +1,13 @@
 #include "Fibaro_Wired_RC2.h"
 
 #define ACTIVATE_DEBUG
+#define DEBUG_SERIAL Serial
 
 void setup()
 {
 
       #ifdef ACTIVATE_DEBUG
-            DEBUG_SERIAL.begin(9600);
+            DEBUG_SERIAL.begin(115200);
             delay(3000);
             DEBUG_SERIAL.println("Init");
       #endif
@@ -14,18 +15,8 @@ void setup()
       // Inicializa los pines del array
       initArrayChannels();
 
-      // Pinmode de los analogs
-      initAnalog();
-
       // Pinmode de MUX
       initMUX();
-
-      // Leo voltaje actual de led de seleccion de canal
-      readLedVoltajeNormal();
-
-      // Me conecto al wifi e inicio el servidor
-      ConnectWiFi_STA(true);
-      InitServer();
 
       // TODO
       // Esto va?
@@ -35,11 +26,26 @@ void setup()
         setChannelState(i,HIGH);
       }
 
+      // Pinmode de los analogs
+      initAnalog();
+
+
+
+      // Leo voltaje actual de led de seleccion de canal
+      readLedVoltajeNormal();
+
+      // Me conecto al wifi e inicio el servidor
+      ConnectWiFi_STA(true);
+      InitServer();
+
+
+
+
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
-      selectChannel(cortinaActual_control2);
       // FIXME
-      //selectChannel(cortinaActual_control3);
+      //selectChannel(cortinaActual_control2);
+      selectChannel(cortinaActual_control3);
 
 
       //turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)
@@ -177,6 +183,3 @@ void initArrayChannels()
       channelArray[7].favouritePositionDelay = CORTINA_7_FAVOURITE_POSITION_DELAY;
 
 }
-
-
-

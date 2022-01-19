@@ -28,7 +28,7 @@
 
 #define CONTROL_5_UP_PIN            27          
 #define CONTROL_5_DOWN_PIN          14   
-#define CONTROL_5_STOP_PIN          12   
+#define CONTROL_5_STOP_PIN          13   
   
 
 // Tiempo funcionando para una posicion determinada (en sec) partiendo desde CORTINA ABIERTA
@@ -45,8 +45,6 @@
 
 
 extern fauxmoESP fauxmo;
-
-
 
 
 

@@ -6,9 +6,9 @@
 
 const char* ssid     = "Cazuela_2.4";
 const char* password = "c@fec0n1eche";
-const char* hostname = "ESP32_Fibaro2";
+const char* hostname = "ESP32_Fibaro1";
 
-IPAddress ip(192, 168, 0, 200);
+IPAddress ip(192, 168, 0, 201);
 IPAddress gateway(192, 168, 0, 1);
 IPAddress subnet(255, 255, 255, 0);
 

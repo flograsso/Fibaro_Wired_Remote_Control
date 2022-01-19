@@ -11,15 +11,16 @@
 
 
 // Control 2
-#define CORTINA_1_ANALOG_LED        36          //CTRL2 - CH1
-#define CORTINA_2_ANALOG_LED        39          //CTRL2 - CH2
-#define CORTINA_3_ANALOG_LED        34          //CTRL2 - CH3
+
+#define CORTINA_1_ANALOG_LED        32          //CTRL3 - CH1
+#define CORTINA_2_ANALOG_LED        33          //CTRL3 - CH2
+#define CORTINA_3_ANALOG_LED        25          //CTRL3 - CH3
 #define CORTINA_4_ANALOG_LED        35          //CTRL2 - CH4
 
-#define CONTROL_2_UP_SHIFTER_CH           0          
-#define CONTROL_2_DOWN_SHIFTER_CH         1    
-#define CONTROL_2_STOP_SHIFTER_CH         2    
-#define CONTROL_2_SELECT_SHIFTER_CH       3    
+#define CONTROL_2_UP_SHIFTER_CH           4        
+#define CONTROL_2_DOWN_SHIFTER_CH         5    
+#define CONTROL_2_STOP_SHIFTER_CH         6    
+#define CONTROL_2_SELECT_SHIFTER_CH       7  
 
 #define CORTINA_1_LED_OUT_SHIFTER_CH      8    
 #define CORTINA_2_LED_OUT_SHIFTER_CH      9   
@@ -27,14 +28,15 @@
 #define CORTINA_4_LED_OUT_SHIFTER_CH      11   
 
 // Control 3
-#define CORTINA_5_ANALOG_LED        32          //CTRL3 - CH1
-#define CORTINA_6_ANALOG_LED        33          //CTRL3 - CH2
-#define CORTINA_7_ANALOG_LED        25          //CTRL3 - CH3
+#define CORTINA_5_ANALOG_LED        36          //CTRL2 - CH1
+#define CORTINA_6_ANALOG_LED        39          //CTRL2 - CH2
+#define CORTINA_7_ANALOG_LED        34          //CTRL2 - CH3
 
-#define CONTROL_3_UP_SHIFTER_CH           4        
-#define CONTROL_3_DOWN_SHIFTER_CH         5    
-#define CONTROL_3_STOP_SHIFTER_CH         6    
-#define CONTROL_3_SELECT_SHIFTER_CH       7  
+
+#define CONTROL_3_UP_SHIFTER_CH           0          
+#define CONTROL_3_DOWN_SHIFTER_CH         1    
+#define CONTROL_3_STOP_SHIFTER_CH         2    
+#define CONTROL_3_SELECT_SHIFTER_CH       3   
 
 #define CORTINA_5_LED_OUT_SHIFTER_CH      12    
 #define CORTINA_6_LED_OUT_SHIFTER_CH      13   
