@@ -4,8 +4,10 @@
 
 
 #include <WiFi.h>
-#include <WebServer.h>
+#include <ESPAsyncWebServer.h>
+#include "fauxmoESP.h"
 #include "WiFIFunctions.h"
+#include <ArduinoQueue.h>
 #include "ServerFunctions.h"
 #include "MUX.h"
 
@@ -46,19 +48,19 @@
 #define COMMAMND_SEND_LED_OUT_SHIFTER_CH   15   
  
 // Tiempo funcionando para una posicion determinada (en sec) partiendo desde CORTINA ABIERTA
-#define CORTINA_1_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_2_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_3_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_4_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_5_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_6_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_7_FAVOURITE_POSITION_DELAY            5
+#define CORTINA_1_FAVOURITE_POSITION_DELAY            40
+#define CORTINA_2_FAVOURITE_POSITION_DELAY            37
+#define CORTINA_3_FAVOURITE_POSITION_DELAY            1
+#define CORTINA_4_FAVOURITE_POSITION_DELAY            1
+#define CORTINA_5_FAVOURITE_POSITION_DELAY            13
+#define CORTINA_6_FAVOURITE_POSITION_DELAY            13
+#define CORTINA_7_FAVOURITE_POSITION_DELAY            13
 
 
 #define CORTINA_NUMBERS       10 // +1 del largo (arranco en 1) Son 7 cortinas mas 2 estados que manejan todo el grupo de cortinas (todos los leds titilantes)
 
 
-extern WebServer server;
+extern fauxmoESP fauxmo;
 
 
 

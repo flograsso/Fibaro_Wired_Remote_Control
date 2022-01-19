@@ -3,6 +3,8 @@
 #define ACTIVATE_DEBUG
 #define DEBUG_SERIAL Serial
 
+extern ArduinoQueue<movimiento_t> colaMovimientos;
+
 void setup()
 {
 
@@ -57,10 +59,17 @@ void setup()
 
 void loop()
 {
-      server.handleClient();
+      fauxmo.handle();
+      if (!colaMovimientos.isEmpty())
+      {
+            movimiento_t mov;
+            mov = colaMovimientos.dequeue();
+            moverCortina(mov.cortinaNumber,mov.accion);
+            Serial.print("Tomo accion de '" + (String)mov.accion + "' sobre cortina: " + (String)mov.cortinaNumber);
+            
+      }
       testWifiConnection();
-     
-      
+
 }
 
 void initAnalog()
