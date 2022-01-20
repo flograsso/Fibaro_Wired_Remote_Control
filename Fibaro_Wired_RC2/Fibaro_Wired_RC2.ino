@@ -20,8 +20,7 @@ void setup()
       // Pinmode de MUX
       initMUX();
 
-      // TODO
-      // Esto va?
+
       for (int i = 0; i<16; i++)
       {
         setMuxChannel(i);
@@ -45,8 +44,8 @@ void setup()
 
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
-      // FIXME
-      //selectChannel(cortinaActual_control2);
+      
+      selectChannel(cortinaActual_control2);
       selectChannel(cortinaActual_control3);
 
 

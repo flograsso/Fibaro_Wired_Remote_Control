@@ -29,8 +29,8 @@ void setup()
       InitServer();
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
-      //FIXME
-      //selectChannel(cortinaActual_control1);
+      
+      selectChannel(cortinaActual_control1);
 
       //turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)
       //turnOnLedSeleccionCortina(cortinaActual_control3); // Enciendo led de seleccion de cortina actual la numero 1 (control 3)
