@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "c6efc2a7-7f74-4e1b-9ba4-da96fd23545e",
+		"name": "Fibaro Remote",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bajar Cortina",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Casambi-Key",
+						"value": "D7fmde2UrxwMK2cRfcg4tGvKmz3D2kz4TPy9fWJwVFCTryChufBfYT28WkCv6Cd9",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "192.168.0.200/cortina?NUM=5&ACTION=D",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"200"
+					],
+					"path": [
+						"cortina"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "NUM",
+							"value": "5"
+						},
+						{
+							"key": "ACTION",
+							"value": "D"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subir Cortina",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Casambi-Key",
+						"value": "D7fmde2UrxwMK2cRfcg4tGvKmz3D2kz4TPy9fWJwVFCTryChufBfYT28WkCv6Cd9",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "192.168.0.200/cortina?NUM=5&ACTION=U",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"200"
+					],
+					"path": [
+						"cortina"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "NUM",
+							"value": "5"
+						},
+						{
+							"key": "ACTION",
+							"value": "U"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parar movimiento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Casambi-Key",
+						"value": "D7fmde2UrxwMK2cRfcg4tGvKmz3D2kz4TPy9fWJwVFCTryChufBfYT28WkCv6Cd9",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "192.168.0.200/cortina?NUM=5&ACTION=S",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"200"
+					],
+					"path": [
+						"cortina"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "NUM",
+							"value": "5"
+						},
+						{
+							"key": "ACTION",
+							"value": "S"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ir a posicion favorita",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Casambi-Key",
+						"value": "D7fmde2UrxwMK2cRfcg4tGvKmz3D2kz4TPy9fWJwVFCTryChufBfYT28WkCv6Cd9",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "192.168.0.200/cortina?NUM=5&ACTION=F",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"200"
+					],
+					"path": [
+						"cortina"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "NUM",
+							"value": "5"
+						},
+						{
+							"key": "ACTION",
+							"value": "F"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
