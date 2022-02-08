@@ -28,12 +28,12 @@
 
 #define CONTROL_5_UP_PIN            27          
 #define CONTROL_5_DOWN_PIN          14   
-#define CONTROL_5_STOP_PIN          12   
+#define CONTROL_5_STOP_PIN          13   
   
 
 // Tiempo funcionando para una posicion determinada (en sec) partiendo desde CORTINA ABIERTA
-#define CORTINA_1_FAVOURITE_POSITION_DELAY            5
-#define CORTINA_2_FAVOURITE_POSITION_DELAY            5
+#define CORTINA_1_FAVOURITE_POSITION_DELAY            24
+#define CORTINA_2_FAVOURITE_POSITION_DELAY            24
 #define CORTINA_3_FAVOURITE_POSITION_DELAY            5
 #define CORTINA_4_FAVOURITE_POSITION_DELAY            5
 #define CORTINA_5_FAVOURITE_POSITION_DELAY            5
@@ -45,8 +45,6 @@
 
 
 extern fauxmoESP fauxmo;
-
-
 
 
 

@@ -6,6 +6,7 @@ AsyncWebServer server(80);
 ArduinoQueue<movimiento_t> colaMovimientos(15);
 
 
+
 // Funcion al recibir petición POST
 // 192.168.0.200/cortina?NUM=1&ACTION=U
 // U (Subir) | D (bajar) | S (stop) | F (fauvorite)
@@ -124,8 +125,12 @@ void InitServer()
   // "Alexa, set kitchen to fifty" (50 means 50% of brightness)
 
   // Add virtual devices
-  fauxmo.addDevice("Cortina Living");
-  fauxmo.addDevice("Cortina Quincho");
+  fauxmo.addDevice("Cortina10");
+  fauxmo.addDevice("Cortina11");
+  fauxmo.addDevice("Cortina12");
+  fauxmo.addDevice("Cortina13");
+  fauxmo.addDevice("Cortina14"); 
+  fauxmo.addDevice("Cortina15");
 
 
   fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state, unsigned char value) {
@@ -143,21 +148,26 @@ void InitServer()
     Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
 
    movimiento_t mov;
+   
    if (state)
       mov.accion = 'U';
    else
       mov.accion = 'D';
-   /*
-   switch (device_name)
-   {
-   case "Cortina Living":
+
+   if (device_name == "Cortina10")
       mov.cortinaNumber = 1;
-      break;
+   else if (device_name == "Cortina11")
+      mov.cortinaNumber = 2;
+   else if (device_name == "Cortina12")
+      mov.cortinaNumber = 3;
+   else if (device_name == "Cortina13")
+      mov.cortinaNumber = 4;
+   else if (device_name == "Cortina14")
+      mov.cortinaNumber = 6;
+   else if (device_name == "Cortina15")
+      mov.cortinaNumber = 5;
+
    
-   default:
-      break;
-   }
-   */
    colaMovimientos.enqueue(mov);
 
   });

@@ -4,12 +4,13 @@ extern ArduinoQueue<movimiento_t> colaMovimientos;
 
 
 #define ACTIVATE_DEBUG
+#define DEBUG_SERIAL Serial
 
 void setup()
 {
 
 #ifdef ACTIVATE_DEBUG
-      DEBUG_SERIAL.begin(9600);
+      DEBUG_SERIAL.begin(115200);
       delay(3000);
       DEBUG_SERIAL.println("Init");
 #endif
@@ -28,6 +29,7 @@ void setup()
       InitServer();
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
+      
       selectChannel(cortinaActual_control1);
 
       //turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)

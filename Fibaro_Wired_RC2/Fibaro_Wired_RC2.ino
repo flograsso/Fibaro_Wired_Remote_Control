@@ -1,12 +1,15 @@
 #include "Fibaro_Wired_RC2.h"
 
 #define ACTIVATE_DEBUG
+#define DEBUG_SERIAL Serial
+
+extern ArduinoQueue<movimiento_t> colaMovimientos;
 
 void setup()
 {
 
       #ifdef ACTIVATE_DEBUG
-            DEBUG_SERIAL.begin(9600);
+            DEBUG_SERIAL.begin(115200);
             delay(3000);
             DEBUG_SERIAL.println("Init");
       #endif
@@ -14,11 +17,20 @@ void setup()
       // Inicializa los pines del array
       initArrayChannels();
 
+      // Pinmode de MUX
+      initMUX();
+
+
+      for (int i = 0; i<16; i++)
+      {
+        setMuxChannel(i);
+        setChannelState(i,HIGH);
+      }
+
       // Pinmode de los analogs
       initAnalog();
 
-      // Pinmode de MUX
-      initMUX();
+
 
       // Leo voltaje actual de led de seleccion de canal
       readLedVoltajeNormal();
@@ -27,19 +39,14 @@ void setup()
       ConnectWiFi_STA(true);
       InitServer();
 
-      // TODO
-      // Esto va?
-      for (int i = 0; i<16; i++)
-      {
-        setMuxChannel(i);
-        setChannelState(i,HIGH);
-      }
+
+
 
 
       // Arranco posicionandome en las cortinas numero 1 de cada control (tiene memoria el control)
+      
       selectChannel(cortinaActual_control2);
-      // FIXME
-      //selectChannel(cortinaActual_control3);
+      selectChannel(cortinaActual_control3);
 
 
       //turnOnLedSeleccionCortina(cortinaActual_control2); // Enciendo led de seleccion de cortina actual la numero 1 (control 2)
@@ -51,10 +58,17 @@ void setup()
 
 void loop()
 {
-      server.handleClient();
+      fauxmo.handle();
+      if (!colaMovimientos.isEmpty())
+      {
+            movimiento_t mov;
+            mov = colaMovimientos.dequeue();
+            moverCortina(mov.cortinaNumber,mov.accion);
+            Serial.print("Tomo accion de '" + (String)mov.accion + "' sobre cortina: " + (String)mov.cortinaNumber);
+            
+      }
       testWifiConnection();
-     
-      
+
 }
 
 void initAnalog()
@@ -177,6 +191,3 @@ void initArrayChannels()
       channelArray[7].favouritePositionDelay = CORTINA_7_FAVOURITE_POSITION_DELAY;
 
 }
-
-
-
